@@ -57,11 +57,18 @@ function LandingPage() {
           <img src="/wealthmaplogo.jpg" alt="Logo" className="w-17 h-14 rounded-4xl" />
           <h1 className="text-2xl font-bold ">Wealth Map</h1>
         </div>
-        <button 
-          onClick={() => navigate('/login')}
-          className="bg-pink-500 hover:bg-pink-700  text-white text-xl font-bold px-4 py-2 rounded-lg  md:w-[15vw] border-4 border-black cursor-pointer  hover:scale-85  transition duration-300 ease-in-out"> 
-          Sign In
-        </button>
+        <div >
+          <button 
+            onClick={() => navigate('/signup')}
+            className="bg-pink-500 hover:bg-pink-700  text-white text-xl font-bold px-4 py-2 m-2 rounded-lg  md:w-[15vw] border-4 border-black cursor-pointer  hover:scale-85  transition duration-300 ease-in-out"> 
+            Sign Up
+          </button>
+          <button 
+            onClick={() => navigate('/login')}
+            className="bg-pink-500 hover:bg-pink-700  text-white text-xl font-bold px-4 py-2 rounded-lg  md:w-[15vw] border-4 border-black cursor-pointer  hover:scale-85  transition duration-300 ease-in-out"> 
+            Sign In
+          </button>
+        </div>
       </header>
 
       <main className="px-6 md:px-20 py-10">

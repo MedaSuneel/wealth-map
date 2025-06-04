@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {ComposableMap,Geographies,Geography,Marker} from "react-simple-maps";
 import {db} from "../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import FilterPanel from "./FilterPanel"; // New component
 
 // US TopoJSON (free dataset)
 const geoUrl =
@@ -44,9 +45,19 @@ const PropertyDetails = ({ property, onBack }) => (
 function USMap() {
 
   const [locations, setLocations] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);
   const [hoveredProperty, setHoveredProperty] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [selectedProperty, setSelectedProperty] = useState(null);
+
+  const [filters, setFilters] = useState({
+    type: "",
+    city: "",
+    minValue: "",
+    maxValue: "",
+    minSize: "",
+    maxSize: ""
+  });
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -56,6 +67,23 @@ function USMap() {
     };
     fetchProperties();
   }, []);
+
+  useEffect(() => {
+    const applyFilters = () => {
+      const result = locations.filter((prop) => {
+        return (
+          (!filters.type || prop.type === filters.type) &&
+          (!filters.city || prop.city?.toLowerCase().includes(filters.city.toLowerCase())) &&
+          (!filters.minValue || prop.currentValue >= parseFloat(filters.minValue)) &&
+          (!filters.maxValue || prop.currentValue <= parseFloat(filters.maxValue)) &&
+          (!filters.minSize || prop.size >= parseFloat(filters.minSize)) &&
+          (!filters.maxSize || prop.size <= parseFloat(filters.maxSize))
+        );
+      });
+      setFilteredLocations(result);
+    };
+    applyFilters();
+  }, [filters, locations]);
 
   const handleMouseEnter = (event, property) => {
     const { clientX, clientY } = event;
@@ -72,8 +100,11 @@ function USMap() {
   }
 
   return (
-    <div className="w-[100%] h-[100vh]">
-        
+    <div className="flex h-[100vh] ">
+      <div className="m-4 h-fit   bg-white overflow-auto">
+        <FilterPanel filters={filters} setFilters={setFilters} />
+      </div>
+      <div className="flex-1 relatve">
       <ComposableMap projection="geoAlbersUsa" className="w-full h-full">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -87,7 +118,30 @@ function USMap() {
           }
         </Geographies>
 
-        {locations.map((property) => (
+        {filteredLocations.map((property) => (
+            <Marker
+              className="cursor-pointer"
+              key={property.name}
+              coordinates={[property.long, property.lat]}
+              onMouseEnter={(e) =>
+                handleMouseEnter(e, {
+                  name: property.name,
+                  size: property.size,
+                  currentValue: property.currentValue,
+                  city: property.city,
+                })
+              }
+              onMouseLeave={handleMouseLeave}
+              onClick={() => setSelectedProperty(property)}
+            >
+              <circle r={6} fill="red" />
+              <text textAnchor="middle" y={-10} className="text-md font-medium fill-black">
+                {property.name}
+              </text>
+            </Marker>
+          ))}
+
+        {/* {locations.map((property) => (
           <Marker className='cursor-pointer' key={property.name} coordinates={[property.long, property.lat]}
             onMouseEnter={(e) => handleMouseEnter(e, {  
               name: property.name,
@@ -99,7 +153,7 @@ function USMap() {
             <circle r={6} fill="red" />
             <text textAnchor="middle" y={-10} className="text-md font-medium fill-black  ">{property.name}</text>
           </Marker>
-        ))}
+        ))} */}
       </ComposableMap>
 
       {/* Tooltip */}
@@ -119,6 +173,7 @@ function USMap() {
         </div>
       )}
 
+    </div>
     </div>
   )
 }

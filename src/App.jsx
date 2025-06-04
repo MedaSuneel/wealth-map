@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage.jsx';
 import LoginPage from './components/LoginPage.jsx';
+import SignUp from './components/SignUp.jsx';
 import USMap from './components/USMap.jsx';
 import Employee from './components/Employee.jsx';
 import Profile from './components/Profile.jsx';
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path='/signup' element={<SignUp />} />
             {/* MainLayout will wrap these child routes */}
             <Route element={<MainLayout />}>
               <Route path="/usmap" element={<USMap />} />

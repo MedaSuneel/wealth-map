@@ -55,6 +55,7 @@ const Employee = () => {
   const handleAddEmployee = async () => {
     try {
       await addDoc(usersRef, newEmployee);
+
       setNewEmployee({
         name: "",
         email: "",
@@ -100,7 +101,7 @@ const Employee = () => {
       <h2 className="text-3xl font-bold mb-6 text-white ">Employee Management</h2>
 
       {currentUserRole === "Admin" && (
-        <div className="mb-6 bg-white p-4 rounded shadow">
+        <div className="mb-6 bg-white p-4 rounded-4xl shadow">
           <h3 className="text-xl font-semibold mb-2">
             {editId ? "Edit Employee" : "Add New Employee"}
           </h3>
@@ -168,14 +169,14 @@ const Employee = () => {
             {editId ? (
               <button
                 onClick={handleUpdate}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-2xl font-lg cursor-pointer "
               >
                 Update Employee
               </button>
             ) : (
               <button
                 onClick={handleAddEmployee}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-2xl font-lg cursor-pointer"
               >
                 Add Employee
               </button>
@@ -185,44 +186,44 @@ const Employee = () => {
       )}
 
       <div className="overflow-x-auto">
-        <table className="min-w-full border bg-white border-gray-500 text-md text-center">
-          <thead className="">
-            <tr>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Email</th>
-              <th className="px-4 py-2 border">Phone</th>
-              <th className="px-4 py-2 border">Role</th>
-              <th className="px-4 py-2 border">Organization</th>
-              <th className="px-4 py-2 border">Joining Date</th>
-              <th className="px-4 py-2 border">Status</th>
+        <table className="min-w-full bg-white border-gray-500 text-md text-center rounded-4xl">
+          <thead>
+            <tr className="bg-black text-white " >
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2 ">Email</th>
+              <th className="px-4 py-2 ">Phone</th>
+              <th className="px-4 py-2 ">Role</th>
+              <th className="px-4 py-2 ">Organization</th>
+              <th className="px-4 py-2 ">Joining Date</th>
+              <th className="px-4 py-2 ">Status</th>
               {currentUserRole === "Admin" && (
-                <th className="px-4 py-2 border">Actions</th>
+                <th className="px-4 py-2 ">Actions</th>
               )}
             </tr>
           </thead>
           <tbody className="text-md font-semibold">
             {employees.map((emp) => (
               <tr key={emp.id}>
-                <td className="border px-4 py-2">{emp.name}</td>
-                <td className="border px-4 py-2">{emp.email}</td>
-                <td className="border px-4 py-2">{emp.phone}</td>
-                <td className="border px-4 py-2">{emp.role}</td>
-                <td className="border px-4 py-2">{emp.organization}</td>
-                <td className="border px-4 py-2">{emp.joiningDate}</td>
-                <td className="border px-4 py-2">{emp.status}</td>
+                <td className=" px-4 py-2">{emp.name}</td>
+                <td className=" px-4 py-2">{emp.email}</td>
+                <td className=" px-4 py-2">{emp.phone}</td>
+                <td className=" px-4 py-2">{emp.role}</td>
+                <td className=" px-4 py-2">{emp.organization}</td>
+                <td className=" px-4 py-2">{emp.joiningDate}</td>
+                <td className=" px-4 py-2">{emp.status}</td>
                 {currentUserRole === "Admin" && (
-                  <td className="border px-4 py-2 space-x-2">
+                  <td className=" px-4 py-2 space-x-2">
                     <button
                       onClick={() => handleEdit(emp)}
-                      className="bg-green-500 text-white px-2 py-1 rounded"
+                      className="bg-white text-white px-2 py-1 rounded cursor-pointer hover:scale-130"
                     >
-                      Edit
+                      <img src="/edit-icon.png" alt="Edit" className=" w-5 h-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(emp.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded"
+                      className="bg-white  text-white px-2 py-1 rounded cursor-pointer hover:scale-130"
                     >
-                      Delete
+                      <img src="/delete_icon.jpg" alt="Edit" className=" w-6   h-6" />
                     </button>
                   </td>
                 )}
