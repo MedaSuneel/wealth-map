@@ -113,6 +113,7 @@ const Employee = () => {
               onChange={handleChange}
               placeholder="Name"
               className="border p-2 rounded"
+              required
             />
             <input
               type="email"
@@ -121,6 +122,7 @@ const Employee = () => {
               onChange={handleChange}
               placeholder="Email"
               className="border p-2 rounded"
+              required
             />
             <input
               type="text"
@@ -129,12 +131,14 @@ const Employee = () => {
               onChange={handleChange}
               placeholder="Phone"
               className="border p-2 rounded"
+              required
             />
             <select
               name="role"
               value={newEmployee.role}
               onChange={handleChange}
               className="border p-2 rounded"
+              required
             >
               <option value="employee">Employee</option>
               <option value="admin">Admin</option>
@@ -146,6 +150,7 @@ const Employee = () => {
               onChange={handleChange}
               placeholder="Organization"
               className="border p-2 rounded"
+              required
             />
             <input
               type="date"
@@ -153,12 +158,14 @@ const Employee = () => {
               value={newEmployee.joiningDate}
               onChange={handleChange}
               className="border p-2 rounded"
+              required
             />
             <select
               name="status"
               value={newEmployee.status}
               onChange={handleChange}
               className="border p-2 rounded"
+              required
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>

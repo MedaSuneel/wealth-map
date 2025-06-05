@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../config/firebase"; // Adjust the path as necessary
-import { doc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import {useNavigate} from 'react-router-dom';
 import { signOut } from "firebase/auth";
@@ -20,14 +20,25 @@ const Profile = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userDocRef = doc(db, "Users", user.uid);
-        const userSnap = await getDoc(userDocRef);
-        if (userSnap.exists()) {
-          setUserInfo(userSnap.data());
-        } else {
+        try {
+          const q = query(
+            collection(db, "Users"),
+            where("email", "==", user.email)
+          );
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            const userData = querySnapshot.docs[0].data();
+            setUserInfo(userData);
+          } else {
           console.error("User document not found in Firestore.");
         }
-        setLoading(false);
+        } catch (error) {
+          console.error("Error fetching user data by email:", error);
+        } finally {
+          setLoading(false);
+        }
+        
       }
     });
 
