@@ -1,17 +1,65 @@
-<<<<<<< HEAD
-# React + Vite
+🏡 Wealth Map – U.S. Real Estate Admin Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive real-estate admin platform that allows employees and administrators to efficiently browse, manage, and visualize U.S. property listings with a clean and responsive UI.
 
-Currently, two official plugins are available:
+📌 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Wealth Map is a feature-rich web application built for managing U.S. real estate property data.
+The platform integrates map-based filtering, enabling users to explore properties by:
 
-## Expanding the ESLint configuration
+City
+Property type (Residential, Commercial, etc.)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# wealth-map
-Wealth Map is a responsive, interactive web application that enables users—particularly corporate employees—to explore real estate ownership and net worth data across the United States. Designed for internal enterprise use, it integrates location-based property data with dynamic filtering tools, making wealth visualization simple and insightful.
->>>>>>> 98252dda8ee3ffa63b3ab99834eb8c0f4112c7e2
+The project focuses on clarity, dynamic visualization, and seamless navigation, ensuring that users can quickly find and manage relevant property information.
+
+🚀 Features
+🔎 Dynamic Property Visualization
+
+Interactive map powered by integrated APIs
+
+Location-based filtering
+
+Property markers with quick info popup
+
+🏷️ Property Management
+
+View property details
+
+Categorized filtering
+
+Quick lookup by city or state
+
+🧭 Smooth Navigation
+
+Clean, minimal UI using Tailwind CSS
+
+Responsive layout
+
+Fast page transitions
+
+🔐 Authentication (Optional)
+
+Firebase authentication for secure access (Admin/Employee roles)
+
+⚙️ Setup Instructions
+
+1️⃣ Clone the Repo
+git clone "repo link"
+cd wealth-map
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Add Firebase Configuration
+
+Create a .env file:
+
+VITE_FIREBASE_API_KEY=your_key
+VITE_FIREBASE_AUTH_DOMAIN=your_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_id
+VITE_FIREBASE_APP_ID=your_app_id
+
+4️⃣ Run the App
+npm run dev
