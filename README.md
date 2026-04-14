@@ -41,6 +41,9 @@ Fast page transitions
 
 Firebase authentication for secure access (Admin/Employee roles)
 
+Live Demo : https://wealth-map-1fa80.web.app/
+Github Link : https://github.com/MedaSuneel/wealth-map.git
+
 ⚙️ Setup Instructions
 
 1️⃣ Clone the Repo
